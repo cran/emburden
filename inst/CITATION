@@ -1,0 +1,34 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "{emburden}: Energy Burden Analysis Using Net Energy Return Methodology",
+  author   = "Eric Scheier",
+  year     = "2025",
+  note     = "R package version 0.6.1",
+  url      = "https://github.com/ericscheier/emburden",
+  textVersion = paste(
+    "Scheier, Eric (2025).",
+    "emburden: Energy Burden Analysis Using Net Energy Return Methodology.",
+    "R package version 0.6.1",
+    "https://github.com/ericscheier/emburden"
+  )
+)
+
+bibentry(
+  bibtype  = "Article",
+  title    = "A measurement strategy to address disparities across household energy burdens",
+  author   = c(person("Eric", "Scheier"), person("Noah", "Kittner")),
+  journal  = "Nature Communications",
+  year     = "2022",
+  volume   = "13",
+  number   = "1",
+  pages    = "288",
+  doi      = "10.1038/s41467-021-27673-y",
+  url      = "https://doi.org/10.1038/s41467-021-27673-y",
+  textVersion = paste(
+    "Scheier, E., Kittner, N. (2022).",
+    "A measurement strategy to address disparities across household energy burdens.",
+    "Nat Commun 13, 288.",
+    "https://doi.org/10.1038/s41467-021-27673-y"
+  ),
+  header   = "To cite the methodology used in emburden:"
+)

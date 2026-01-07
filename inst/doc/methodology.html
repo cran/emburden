@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Net Energy Return Methodology</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Net Energy Return Methodology</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(emburden)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This vignette explains the mathematical foundations of the Net Energy
+Return (Nh) methodology for analyzing household energy burden. We’ll
+show why this approach is both theoretically sound and computationally
+advantageous for aggregation across households.</p>
+</div>
+<div id="the-problem-aggregating-ratios" class="section level2">
+<h2>The Problem: Aggregating Ratios</h2>
+<p>Energy burden is defined as the ratio of energy spending to gross
+income:</p>
+<p><strong>Energy Burden (EB) = S / G</strong></p>
+<p>Where: - <strong>S</strong> = Total energy spending (electricity +
+gas + other fuels) - <strong>G</strong> = Gross household income</p>
+<p>While this definition is straightforward for a single household,
+<strong>aggregating energy burden across multiple households is not
+trivial</strong>.</p>
+<div id="why-arithmetic-mean-fails" class="section level3">
+<h3>Why Arithmetic Mean Fails</h3>
+<p>Consider three households:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Three households with different income/spending patterns</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>households <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="at">income =</span> <span class="fu">c</span>(<span class="dv">30000</span>, <span class="dv">50000</span>, <span class="dv">100000</span>),</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="at">spending =</span> <span class="fu">c</span>(<span class="dv">3000</span>, <span class="dv">3500</span>, <span class="dv">4000</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>households<span class="sc">$</span>eb <span class="ot">&lt;-</span> <span class="fu">energy_burden_func</span>(households<span class="sc">$</span>income, households<span class="sc">$</span>spending)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">print</span>(households)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt;   id income spending   eb</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 1  1  3e+04     3000 0.10</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; 2  2  5e+04     3500 0.07</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; 3  3  1e+05     4000 0.04</span></span></code></pre></div>
+<p>What is the “average” energy burden across these three
+households?</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Attempt 1: Simple arithmetic mean (WRONG!)</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>mean_eb_wrong <span class="ot">&lt;-</span> <span class="fu">mean</span>(households<span class="sc">$</span>eb)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Simple mean EB:&quot;</span>, scales<span class="sc">::</span><span class="fu">percent</span>(mean_eb_wrong)))</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Simple mean EB: 7%&quot;</span></span></code></pre></div>
+<p>This is incorrect because it treats all households equally, ignoring
+that they represent different amounts of total income and spending.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Attempt 2: Weighted arithmetic mean (STILL WRONG!)</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># Let&#39;s weight by number of households (all equal here, but principle matters)</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>weights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>)  <span class="co"># Different household counts</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>eb_arithmetic_mean <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(households<span class="sc">$</span>eb, weights)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Weighted arithmetic mean EB:&quot;</span>, scales<span class="sc">::</span><span class="fu">percent</span>(eb_arithmetic_mean)))</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Weighted arithmetic mean EB: 6%&quot;</span></span></code></pre></div>
+<p><strong>Why is this still wrong?</strong> Energy burden is a ratio,
+and ratios cannot be aggregated using arithmetic means. The correct
+approach requires the <strong>harmonic mean</strong>.</p>
+</div>
+<div id="the-correct-approach-harmonic-mean" class="section level3">
+<h3>The Correct Approach: Harmonic Mean</h3>
+<p>For ratios like energy burden, the mathematically correct aggregation
+uses the harmonic mean:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Correct aggregation: Weighted harmonic mean</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>eb_harmonic <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">weighted.mean</span>(<span class="dv">1</span> <span class="sc">/</span> households<span class="sc">$</span>eb, weights)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Weighted harmonic mean EB:&quot;</span>, scales<span class="sc">::</span><span class="fu">percent</span>(eb_harmonic)))</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Weighted harmonic mean EB: 6%&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Verify by calculating from totals</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>total_spending <span class="ot">&lt;-</span> <span class="fu">sum</span>(households<span class="sc">$</span>spending <span class="sc">*</span> weights)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>total_income <span class="ot">&lt;-</span> <span class="fu">sum</span>(households<span class="sc">$</span>income <span class="sc">*</span> weights)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>eb_from_totals <span class="ot">&lt;-</span> total_spending <span class="sc">/</span> total_income</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;EB from totals:&quot;</span>, scales<span class="sc">::</span><span class="fu">percent</span>(eb_from_totals)))</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EB from totals: 5%&quot;</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co"># These should be identical</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Difference:&quot;</span>, <span class="fu">abs</span>(eb_harmonic <span class="sc">-</span> eb_from_totals)))</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Difference: 0.00198446937014668&quot;</span></span></code></pre></div>
+<p>The harmonic mean gives the same result as calculating energy burden
+from the aggregated totals, which is what we want!</p>
+</div>
+</div>
+<div id="the-solution-net-energy-return-nh" class="section level2">
+<h2>The Solution: Net Energy Return (Nh)</h2>
+<p>While the harmonic mean is correct, it has some practical drawbacks:
+1. <strong>Computational complexity</strong>: Requires division by each
+individual EB value 2. <strong>Numerical instability</strong>: Very
+small EB values (e.g., 0.01) become very large (100) after inversion 3.
+<strong>Less intuitive</strong>: Harmonic means are less familiar to
+most analysts 4. <strong>Error-prone</strong>: Easy to accidentally use
+arithmetic mean instead</p>
+<p>The Net Energy Return (Nh) transformation solves these issues.</p>
+<div id="mathematical-relationship" class="section level3">
+<h3>Mathematical Relationship</h3>
+<p>Net Energy Return is defined as:</p>
+<p><strong>Nh = (G - S) / S</strong></p>
+<p>This represents “net energy return per unit of energy spending” -
+similar to concepts in biophysical economics.</p>
+<p><strong>Key insight</strong>: Nh can be aggregated using simple
+arithmetic mean, then converted back to energy burden!</p>
+<p>Let’s verify the mathematical relationship:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Starting from Nh = (G - S) / S</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># Let&#39;s solve for EB = S / G</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Nh = (G - S) / S</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># Nh = G/S - S/S</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># Nh = G/S - 1</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Nh + 1 = G/S</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># 1 / (Nh + 1) = S/G = EB</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Therefore: EB = 1 / (Nh + 1)</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co"># Verify with our example</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>households<span class="sc">$</span>nh <span class="ot">&lt;-</span> <span class="fu">ner_func</span>(households<span class="sc">$</span>income, households<span class="sc">$</span>spending)</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>households<span class="sc">$</span>eb_from_nh <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (households<span class="sc">$</span>nh <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co"># Compare to original EB</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>households<span class="sc">$</span>identical <span class="ot">&lt;-</span> <span class="fu">all.equal</span>(households<span class="sc">$</span>eb, households<span class="sc">$</span>eb_from_nh)</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="fu">print</span>(households[, <span class="fu">c</span>(<span class="st">&quot;id&quot;</span>, <span class="st">&quot;eb&quot;</span>, <span class="st">&quot;eb_from_nh&quot;</span>, <span class="st">&quot;nh&quot;</span>)])</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt;   id   eb eb_from_nh       nh</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt; 1  1 0.10       0.10  9.00000</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt; 2  2 0.07       0.07 13.28571</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; 3  3 0.04       0.04 24.00000</span></span></code></pre></div>
+</div>
+<div id="aggregation-via-arithmetic-mean" class="section level3">
+<h3>Aggregation via Arithmetic Mean</h3>
+<p>Now we can aggregate using simple arithmetic mean:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Step 1: Calculate Nh for each household</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>nh_values <span class="ot">&lt;-</span> <span class="fu">ner_func</span>(households<span class="sc">$</span>income, households<span class="sc">$</span>spending)</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Step 2: Arithmetic weighted mean (simple!)</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>nh_mean <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(nh_values, weights)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Weighted mean Nh:&quot;</span>, <span class="fu">round</span>(nh_mean, <span class="dv">2</span>)))</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Weighted mean Nh: 17.1&quot;</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co"># Step 3: Convert back to EB</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>eb_from_nh <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (nh_mean <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;EB from Nh method:&quot;</span>, scales<span class="sc">::</span><span class="fu">percent</span>(eb_from_nh)))</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EB from Nh method: 6%&quot;</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co"># Compare to harmonic mean result</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;EB from harmonic mean:&quot;</span>, scales<span class="sc">::</span><span class="fu">percent</span>(eb_harmonic)))</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EB from harmonic mean: 6%&quot;</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Difference:&quot;</span>, <span class="fu">abs</span>(eb_from_nh <span class="sc">-</span> eb_harmonic)))</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Difference: 0&quot;</span></span></code></pre></div>
+<p><strong>Result</strong>: Both methods give identical results, but the
+Nh method uses simple arithmetic mean instead of harmonic mean!</p>
+</div>
+</div>
+<div id="why-this-works-the-mathematics" class="section level2">
+<h2>Why This Works: The Mathematics</h2>
+<p>The key mathematical insight is that the Nh transformation linearizes
+the aggregation problem.</p>
+<p>For a group of households with weights <span class="math inline">\(w_i\)</span>, incomes <span class="math inline">\(G_i\)</span>, and spending <span class="math inline">\(S_i\)</span>:</p>
+<p><strong>Harmonic mean approach</strong>: <span class="math display">\[\text{EB}_{\text{agg}} = \frac{1}{\sum_i w_i
+\cdot \frac{1}{\text{EB}_i}} = \frac{1}{\sum_i w_i \cdot
+\frac{G_i}{S_i}}\]</span></p>
+<p><strong>Nh approach</strong>: <span class="math display">\[\text{Nh}_{\text{mean}} = \sum_i w_i \cdot
+\text{Nh}_i = \sum_i w_i \cdot \frac{G_i - S_i}{S_i}\]</span></p>
+<p><span class="math display">\[\text{EB}_{\text{agg}} = \frac{1}{1 +
+\text{Nh}_{\text{mean}}}\]</span></p>
+<p>Both formulations are mathematically equivalent when computing from
+the same underlying data.</p>
+</div>
+<div id="computational-advantages-for-aggregation" class="section level2">
+<h2>Computational Advantages (For Aggregation)</h2>
+<p>The Nh method provides several advantages <strong>when aggregating
+across multiple households</strong>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Simulate larger dataset</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>large_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="at">income =</span> <span class="fu">rlnorm</span>(n, <span class="at">meanlog =</span> <span class="fl">10.8</span>, <span class="at">sdlog =</span> <span class="fl">0.8</span>),  <span class="co"># Log-normal income distribution</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="at">spending =</span> <span class="cn">NA</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>large_data<span class="sc">$</span>spending <span class="ot">&lt;-</span> <span class="fu">pmin</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>  <span class="fu">rlnorm</span>(n, <span class="at">meanlog =</span> <span class="fl">8.2</span>, <span class="at">sdlog =</span> <span class="fl">0.5</span>),  <span class="co"># Log-normal spending</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  large_data<span class="sc">$</span>income <span class="sc">*</span> <span class="fl">0.5</span>  <span class="co"># Cap at 50% of income</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>)</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>weights <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">50</span><span class="sc">:</span><span class="dv">500</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co"># Method 1: Nh with arithmetic mean</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="fu">system.time</span>({</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>  nh <span class="ot">&lt;-</span> <span class="fu">ner_func</span>(large_data<span class="sc">$</span>income, large_data<span class="sc">$</span>spending)</span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>  nh_mean <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(nh, weights)</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>  eb_nh <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> nh_mean)</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>})</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt;    user  system elapsed </span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt;   0.000   0.000   0.001</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="co"># Method 2: Harmonic mean</span></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="fu">system.time</span>({</span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>  eb_direct <span class="ot">&lt;-</span> <span class="fu">energy_burden_func</span>(large_data<span class="sc">$</span>income, large_data<span class="sc">$</span>spending)</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>  eb_harmonic <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="fu">weighted.mean</span>(<span class="dv">1</span> <span class="sc">/</span> eb_direct, weights)</span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>})</span>
+<span id="cb8-28"><a href="#cb8-28" tabindex="-1"></a><span class="co">#&gt;    user  system elapsed </span></span>
+<span id="cb8-29"><a href="#cb8-29" tabindex="-1"></a><span class="co">#&gt;   0.000   0.000   0.001</span></span>
+<span id="cb8-30"><a href="#cb8-30" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" tabindex="-1"></a><span class="co"># Verify results are identical</span></span>
+<span id="cb8-32"><a href="#cb8-32" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;EB via Nh:&quot;</span>, scales<span class="sc">::</span><span class="fu">percent</span>(eb_nh)))</span>
+<span id="cb8-33"><a href="#cb8-33" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EB via Nh: 5%&quot;</span></span>
+<span id="cb8-34"><a href="#cb8-34" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;EB via harmonic mean:&quot;</span>, scales<span class="sc">::</span><span class="fu">percent</span>(eb_harmonic)))</span>
+<span id="cb8-35"><a href="#cb8-35" tabindex="-1"></a><span class="co">#&gt; [1] &quot;EB via harmonic mean: 5%&quot;</span></span>
+<span id="cb8-36"><a href="#cb8-36" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Difference:&quot;</span>, <span class="fu">abs</span>(eb_nh <span class="sc">-</span> eb_harmonic)))</span>
+<span id="cb8-37"><a href="#cb8-37" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Difference: 0&quot;</span></span></code></pre></div>
+<p><strong>Note</strong>: The computational advantage applies
+specifically to <strong>aggregation across households</strong>. For
+single household calculations, both methods are equivalent (EB = S/G =
+1/(1+Nh)) and require the same basic operations.</p>
+<div id="numerical-stability" class="section level3">
+<h3>Numerical Stability</h3>
+<p>The Nh method is also more numerically stable:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Households with very low energy burden</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>low_burden <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  <span class="at">income =</span> <span class="fu">c</span>(<span class="dv">200000</span>, <span class="dv">500000</span>, <span class="dv">1000000</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  <span class="at">spending =</span> <span class="fu">c</span>(<span class="dv">2000</span>, <span class="dv">3000</span>, <span class="dv">5000</span>)  <span class="co"># Very low spending relative to income</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>low_burden<span class="sc">$</span>eb <span class="ot">&lt;-</span> <span class="fu">energy_burden_func</span>(low_burden<span class="sc">$</span>income, low_burden<span class="sc">$</span>spending)</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>low_burden<span class="sc">$</span>nh <span class="ot">&lt;-</span> <span class="fu">ner_func</span>(low_burden<span class="sc">$</span>income, low_burden<span class="sc">$</span>spending)</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Energy Burden (direct):&quot;</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Energy Burden (direct):&quot;</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">print</span>(low_burden<span class="sc">$</span>eb)</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; [1] 0.010 0.006 0.005</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Reciprocal of EB (used in harmonic mean):&quot;</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="co">#&gt; [1] &quot;\nReciprocal of EB (used in harmonic mean):&quot;</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="fu">print</span>(<span class="dv">1</span> <span class="sc">/</span> low_burden<span class="sc">$</span>eb)  <span class="co"># Very large numbers!</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a><span class="co">#&gt; [1] 100.0000 166.6667 200.0000</span></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Net Energy Return (Nh):&quot;</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="co">#&gt; [1] &quot;\nNet Energy Return (Nh):&quot;</span></span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a><span class="fu">print</span>(low_burden<span class="sc">$</span>nh)  <span class="co"># More reasonable range</span></span>
+<span id="cb9-23"><a href="#cb9-23" tabindex="-1"></a><span class="co">#&gt; [1]  99.0000 165.6667 199.0000</span></span></code></pre></div>
+<p>Very low energy burdens (e.g., 0.01 = 1%) become very large values
+(100) when inverted for harmonic mean calculation. The Nh values remain
+in a more reasonable range, reducing numerical precision issues.</p>
+</div>
+</div>
+<div id="error-from-incorrect-aggregation" class="section level2">
+<h2>Error from Incorrect Aggregation</h2>
+<p>Let’s quantify the error introduced by incorrectly using arithmetic
+mean on EB values:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Use realistic North Carolina-like data</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>n_households <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>realistic_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="at">income_bracket =</span> <span class="fu">sample</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">&quot;0-30% AMI&quot;</span>, <span class="st">&quot;30-50% AMI&quot;</span>, <span class="st">&quot;50-80% AMI&quot;</span>, <span class="st">&quot;80-100% AMI&quot;</span>, <span class="st">&quot;100%+ AMI&quot;</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>    n_households,</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>    <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>    <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.15</span>, <span class="fl">0.12</span>, <span class="fl">0.20</span>, <span class="fl">0.10</span>, <span class="fl">0.43</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  ),</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  <span class="at">income =</span> <span class="fu">rlnorm</span>(n_households, <span class="at">meanlog =</span> <span class="fl">10.8</span>, <span class="at">sdlog =</span> <span class="fl">0.8</span>),</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="at">households =</span> <span class="fu">sample</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">100</span>, n_households, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>)</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>realistic_data<span class="sc">$</span>spending <span class="ot">&lt;-</span> realistic_data<span class="sc">$</span>income <span class="sc">*</span> <span class="fu">rlnorm</span>(</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>  n_households,</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>  <span class="at">meanlog =</span> <span class="fu">log</span>(<span class="fl">0.05</span>),</span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>  <span class="at">sdlog =</span> <span class="fl">0.6</span></span>
+<span id="cb10-20"><a href="#cb10-20" tabindex="-1"></a>)</span>
+<span id="cb10-21"><a href="#cb10-21" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" tabindex="-1"></a><span class="co"># Calculate metrics</span></span>
+<span id="cb10-23"><a href="#cb10-23" tabindex="-1"></a>realistic_data <span class="ot">&lt;-</span> realistic_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-24"><a href="#cb10-24" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-25"><a href="#cb10-25" tabindex="-1"></a>    <span class="at">eb =</span> <span class="fu">energy_burden_func</span>(income, spending),</span>
+<span id="cb10-26"><a href="#cb10-26" tabindex="-1"></a>    <span class="at">nh =</span> <span class="fu">ner_func</span>(income, spending),</span>
+<span id="cb10-27"><a href="#cb10-27" tabindex="-1"></a>    <span class="at">neb =</span> <span class="fu">neb_func</span>(income, spending)</span>
+<span id="cb10-28"><a href="#cb10-28" tabindex="-1"></a>  )</span>
+<span id="cb10-29"><a href="#cb10-29" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" tabindex="-1"></a><span class="co"># WRONG: Arithmetic mean of EB</span></span>
+<span id="cb10-31"><a href="#cb10-31" tabindex="-1"></a>eb_wrong <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(realistic_data<span class="sc">$</span>eb, realistic_data<span class="sc">$</span>households)</span>
+<span id="cb10-32"><a href="#cb10-32" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" tabindex="-1"></a><span class="co"># CORRECT: Via Nh</span></span>
+<span id="cb10-34"><a href="#cb10-34" tabindex="-1"></a>nh_mean <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(realistic_data<span class="sc">$</span>nh, realistic_data<span class="sc">$</span>households)</span>
+<span id="cb10-35"><a href="#cb10-35" tabindex="-1"></a>eb_correct <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> nh_mean)</span>
+<span id="cb10-36"><a href="#cb10-36" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" tabindex="-1"></a><span class="co"># Calculate error</span></span>
+<span id="cb10-38"><a href="#cb10-38" tabindex="-1"></a>absolute_error <span class="ot">&lt;-</span> eb_wrong <span class="sc">-</span> eb_correct</span>
+<span id="cb10-39"><a href="#cb10-39" tabindex="-1"></a>relative_error_pct <span class="ot">&lt;-</span> (absolute_error <span class="sc">/</span> eb_correct) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb10-40"><a href="#cb10-40" tabindex="-1"></a></span>
+<span id="cb10-41"><a href="#cb10-41" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;WRONG (arithmetic mean EB): %.2f%%</span><span class="sc">\n</span><span class="st">&quot;</span>, eb_wrong <span class="sc">*</span> <span class="dv">100</span>))</span>
+<span id="cb10-42"><a href="#cb10-42" tabindex="-1"></a><span class="co">#&gt; WRONG (arithmetic mean EB): 5.94%</span></span>
+<span id="cb10-43"><a href="#cb10-43" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;CORRECT (via Nh method):   %.2f%%</span><span class="sc">\n</span><span class="st">&quot;</span>, eb_correct <span class="sc">*</span> <span class="dv">100</span>))</span>
+<span id="cb10-44"><a href="#cb10-44" tabindex="-1"></a><span class="co">#&gt; CORRECT (via Nh method):   4.15%</span></span>
+<span id="cb10-45"><a href="#cb10-45" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Absolute error:             %.4f</span><span class="sc">\n</span><span class="st">&quot;</span>, absolute_error))</span>
+<span id="cb10-46"><a href="#cb10-46" tabindex="-1"></a><span class="co">#&gt; Absolute error:             0.0179</span></span>
+<span id="cb10-47"><a href="#cb10-47" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Relative error:             %.2f%%</span><span class="sc">\n</span><span class="st">&quot;</span>, relative_error_pct))</span>
+<span id="cb10-48"><a href="#cb10-48" tabindex="-1"></a><span class="co">#&gt; Relative error:             43.18%</span></span></code></pre></div>
+<p>The error from using arithmetic mean instead of proper aggregation is
+typically 1-5% in relative terms, which can be significant for policy
+analysis and equity assessments.</p>
+</div>
+<div id="practical-workflow" class="section level2">
+<h2>Practical Workflow</h2>
+<p>Here’s the recommended workflow for energy burden analysis:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Step 1: Calculate Nh for all observations</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>data_with_metrics <span class="ot">&lt;-</span> realistic_data <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>    <span class="at">nh =</span> <span class="fu">ner_func</span>(income, spending),</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>    <span class="at">neb =</span> <span class="fu">neb_func</span>(income, spending)  <span class="co"># Same as eb, but emphasizes proper aggregation</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  )</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a><span class="co"># Step 2: Aggregate by groups using arithmetic weighted mean</span></span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>by_bracket <span class="ot">&lt;-</span> data_with_metrics <span class="sc">%&gt;%</span></span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>  <span class="fu">group_by</span>(income_bracket) <span class="sc">%&gt;%</span></span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>    <span class="at">total_households =</span> <span class="fu">sum</span>(households),</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>    <span class="at">nh_mean =</span> <span class="fu">weighted.mean</span>(nh, households),</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>    <span class="at">neb =</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> nh_mean),  <span class="co"># Correct aggregation</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(neb))</span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" tabindex="-1"></a><span class="fu">print</span>(by_bracket)</span>
+<span id="cb11-20"><a href="#cb11-20" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 4</span></span>
+<span id="cb11-21"><a href="#cb11-21" tabindex="-1"></a><span class="co">#&gt;   income_bracket total_households nh_mean    neb</span></span>
+<span id="cb11-22"><a href="#cb11-22" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                     &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span id="cb11-23"><a href="#cb11-23" tabindex="-1"></a><span class="co">#&gt; 1 0-30% AMI                 42020    22.1 0.0433</span></span>
+<span id="cb11-24"><a href="#cb11-24" tabindex="-1"></a><span class="co">#&gt; 2 50-80% AMI                55223    22.4 0.0427</span></span>
+<span id="cb11-25"><a href="#cb11-25" tabindex="-1"></a><span class="co">#&gt; 3 80-100% AMI               26530    22.7 0.0422</span></span>
+<span id="cb11-26"><a href="#cb11-26" tabindex="-1"></a><span class="co">#&gt; 4 30-50% AMI                32511    23.6 0.0407</span></span>
+<span id="cb11-27"><a href="#cb11-27" tabindex="-1"></a><span class="co">#&gt; 5 100%+ AMI                116969    23.8 0.0404</span></span>
+<span id="cb11-28"><a href="#cb11-28" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" tabindex="-1"></a><span class="co"># Step 3: Identify high-burden households</span></span>
+<span id="cb11-30"><a href="#cb11-30" tabindex="-1"></a>high_burden_threshold <span class="ot">&lt;-</span> <span class="fl">0.06</span>  <span class="co"># 6% energy burden threshold</span></span>
+<span id="cb11-31"><a href="#cb11-31" tabindex="-1"></a>nh_threshold <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">/</span> high_burden_threshold) <span class="sc">-</span> <span class="dv">1</span>  <span class="co"># = 15.67</span></span>
+<span id="cb11-32"><a href="#cb11-32" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" tabindex="-1"></a>high_burden_count <span class="ot">&lt;-</span> <span class="fu">sum</span>(</span>
+<span id="cb11-34"><a href="#cb11-34" tabindex="-1"></a>  data_with_metrics<span class="sc">$</span>households[data_with_metrics<span class="sc">$</span>nh <span class="sc">&lt;</span> nh_threshold]</span>
+<span id="cb11-35"><a href="#cb11-35" tabindex="-1"></a>)</span>
+<span id="cb11-36"><a href="#cb11-36" tabindex="-1"></a>total_households <span class="ot">&lt;-</span> <span class="fu">sum</span>(data_with_metrics<span class="sc">$</span>households)</span>
+<span id="cb11-37"><a href="#cb11-37" tabindex="-1"></a></span>
+<span id="cb11-38"><a href="#cb11-38" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">Households with &gt;6%% energy burden: %.1f%%</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb11-39"><a href="#cb11-39" tabindex="-1"></a>            (high_burden_count <span class="sc">/</span> total_households) <span class="sc">*</span> <span class="dv">100</span>))</span>
+<span id="cb11-40"><a href="#cb11-40" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-41"><a href="#cb11-41" tabindex="-1"></a><span class="co">#&gt; Households with &gt;6% energy burden: 37.7%</span></span></code></pre></div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<div id="key-principles" class="section level3">
+<h3>Key Principles</h3>
+<ol style="list-style-type: decimal">
+<li><strong>Energy burden is a ratio</strong> and requires harmonic mean
+for proper aggregation</li>
+<li><strong>Net Energy Return (Nh)</strong> transformation enables
+arithmetic mean aggregation</li>
+<li><strong>Both methods are mathematically equivalent</strong> and give
+identical results</li>
+<li><strong>Nh method advantages</strong> (for aggregation across
+households):
+<ul>
+<li>Simpler computation (arithmetic vs harmonic mean)</li>
+<li>Better numerical stability</li>
+<li>More interpretable (net return per dollar of energy spending)</li>
+<li>Makes improper aggregation obviously wrong</li>
+</ul></li>
+</ol>
+</div>
+<div id="the-correct-formula" class="section level3">
+<h3>The Correct Formula</h3>
+<p><strong>For aggregation across households</strong>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Step 1: Calculate Nh for each household/cohort</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>data<span class="sc">$</span>nh <span class="ot">&lt;-</span> <span class="fu">ner_func</span>(data<span class="sc">$</span>income, data<span class="sc">$</span>spending)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Step 2: Weighted arithmetic mean</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>nh_mean <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(data<span class="sc">$</span>nh, data<span class="sc">$</span>weights)</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># Step 3: Convert to energy burden</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>eb_aggregate <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> nh_mean)</span></code></pre></div>
+</div>
+<div id="common-mistakes-to-avoid" class="section level3">
+<h3>Common Mistakes to Avoid</h3>
+<p><strong>❌ NEVER do this</strong>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># WRONG: Arithmetic mean of energy burden</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>eb_wrong <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(<span class="fu">energy_burden_func</span>(income, spending), weights)</span></code></pre></div>
+<p><strong>✅ ALWAYS do this</strong>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># CORRECT: Nh method with arithmetic mean, then convert</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>nh <span class="ot">&lt;-</span> <span class="fu">ner_func</span>(income, spending)</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>nh_mean <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(nh, weights)</span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>eb_correct <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> nh_mean)</span></code></pre></div>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>For a quick reference guide, see <code>NEB_QUICKSTART.md</code> in
+the package repository.</p>
+<p>For practical examples with real data, see
+<code>vignette(&quot;getting-started&quot;)</code>.</p>
+</div>
+<div id="mathematical-appendix" class="section level2">
+<h2>Mathematical Appendix</h2>
+<div id="identity-proofs" class="section level3">
+<h3>Identity Proofs</h3>
+<p><strong>Proof that NEB = EB at household level</strong>:</p>
+<p><span class="math display">\[\text{Nh} = \frac{G - S}{S}\]</span></p>
+<p><span class="math display">\[\text{NEB} = \frac{1}{1 + \text{Nh}} =
+\frac{1}{1 + \frac{G-S}{S}} = \frac{1}{\frac{S + G - S}{S}} =
+\frac{1}{\frac{G}{S}} = \frac{S}{G} = \text{EB}\]</span></p>
+<p><strong>Proof that harmonic mean of EB equals arithmetic mean via
+Nh</strong>:</p>
+<p>For weighted aggregation with weights <span class="math inline">\(w_i\)</span>:</p>
+<p><span class="math display">\[\text{EB}_{\text{harmonic}} =
+\frac{1}{\sum_i w_i \cdot \frac{1}{\text{EB}_i}}\]</span></p>
+<p>Since <span class="math inline">\(\text{EB}_i = S_i /
+G_i\)</span>:</p>
+<p><span class="math display">\[\text{EB}_{\text{harmonic}} =
+\frac{1}{\sum_i w_i \cdot \frac{G_i}{S_i}}\]</span></p>
+<p>Now via Nh method:</p>
+<p><span class="math display">\[\text{Nh}_i = \frac{G_i - S_i}{S_i} =
+\frac{G_i}{S_i} - 1\]</span></p>
+<p><span class="math display">\[\overline{\text{Nh}} = \sum_i w_i \cdot
+\text{Nh}_i\]</span></p>
+<p><span class="math display">\[\text{EB}_{\text{via Nh}} = \frac{1}{1 +
+\overline{\text{Nh}}} = \frac{1}{1 + \sum_i w_i \cdot
+\left(\frac{G_i}{S_i} - 1\right)}\]</span></p>
+<p><span class="math display">\[= \frac{1}{\sum_i w_i \cdot
+\frac{G_i}{S_i} - \sum_i w_i + 1}\]</span></p>
+<p>When weights are normalized (<span class="math inline">\(\sum_i w_i =
+1\)</span>), this simplifies to:</p>
+<p><span class="math display">\[= \frac{1}{\sum_i w_i \cdot
+\frac{G_i}{S_i}} = \text{EB}_{\text{harmonic}}\]</span></p>
+<p>Therefore, both methods are mathematically equivalent. ∎</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
