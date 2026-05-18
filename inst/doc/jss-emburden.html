@@ -11,7 +11,7 @@
 
 <meta name="author" content="Eric Scheier" />
 
-<meta name="date" content="2025-12-20" />
+<meta name="date" content="2026-05-18" />
 
 <title>emburden: Temporal Analysis of Household Energy Burden Using Net Energy Return Metrics</title>
 
@@ -258,7 +258,6 @@ if (window.hljs) {
 div.csl-bib-body { }
 div.csl-entry {
 clear: both;
-margin-bottom: 0em;
 }
 .hanging div.csl-entry {
 margin-left:2em;
@@ -376,7 +375,7 @@ display: none;
 <h1 class="title toc-ignore">emburden: Temporal Analysis of Household
 Energy Burden Using Net Energy Return Metrics</h1>
 <h4 class="author">Eric Scheier</h4>
-<h4 class="date">2025-12-20</h4>
+<h4 class="date">2026-05-18</h4>
 
 </div>
 
@@ -502,10 +501,10 @@ scales.</p>
 millions of households in the United States. Low-income households face
 disproportionate energy burdens, often spending more than 6% of their
 income on energy costs compared to 2-3% for higher-income households
-<span class="citation">(Ross, Drehobl, and Stickles 2018; Drehobl and
-Ross 2016)</span>. Understanding these disparities and tracking changes
-over time is essential for designing effective energy assistance
-programs and policies.</p>
+<span class="citation">(Ross et al. 2018; Drehobl and Ross 2016)</span>.
+Understanding these disparities and tracking changes over time is
+essential for designing effective energy assistance programs and
+policies.</p>
 <p>The traditional energy burden metric—the ratio of energy expenditures
 (<span class="math inline">\(S\)</span>) to gross income (<span class="math inline">\(G\)</span>)—has several analytical limitations. As
 a ratio with income in the denominator, energy burden (<span class="math inline">\(E_b = S/G\)</span>) approaches infinity for
@@ -518,11 +517,11 @@ or consistently applied <span class="citation">(Scheier and Kittner
 <h2>Mathematical foundations</h2>
 <p>The <code>emburden</code> package for R addresses these challenges by
 implementing Net Energy Return (NER) methodology, adapted from
-macro-energy systems analysis <span class="citation">(Hall, Lambert, and
-Balogh 2011; Brandt, Dale, and Barnhart 2013; Carbajales-Dale et al.
-2014)</span>. Net energy analysis estimates the net energy return of a
-process as a relationship between gross resources extracted and embodied
-energy directed toward extraction:</p>
+macro-energy systems analysis <span class="citation">(Hall et al. 2011;
+Brandt et al. 2013; Carbajales-Dale et al. 2014)</span>. Net energy
+analysis estimates the net energy return of a process as a relationship
+between gross resources extracted and embodied energy directed toward
+extraction:</p>
 <p><span class="math display">\[G = Gross\ Resource\
 Extracted\]</span></p>
 <p><span class="math display">\[S = Spending\ on\ Extraction\
@@ -1178,7 +1177,7 @@ through the package website.</p>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-bednarrecognition2020" class="csl-entry">
 Bednar, Dominic J, and Tony G Reames. 2020. <span>“Recognition of and
 Response to Energy Poverty in the United States.”</span> <em>Nature
@@ -1198,9 +1197,9 @@ Ecology, Energy Analysis, and Economics.”</span> <em>Energies</em> 7
 (3): 1347–96.
 </div>
 <div id="ref-drehobl2016lifting" class="csl-entry">
-Drehobl, Ariel, and Lauren Ross. 2016. <span>“Lifting the High Energy
+Drehobl, Ariel, and Lauren Ross. 2016. <em>Lifting the High Energy
 Burden in America’s Largest Cities: How Energy Efficiency Can Improve
-Low Income and Underserved Communities.”</span> American Council for an
+Low Income and Underserved Communities</em>. American Council for an
 Energy-Efficient Economy.
 </div>
 <div id="ref-hall2011eroi" class="csl-entry">
@@ -1210,9 +1209,8 @@ Hall, Charles AS, Jessica G Lambert, and Stephen B Balogh. 2011.
 </div>
 <div id="ref-ma2019lowincome" class="csl-entry">
 Ma, Ou, Jonathan Layke, Jeff Deason, Richard E Brown, and Alex Lekov.
-2019. <span>“Low-Income Energy Affordability Data (LEAD) Tool
-Methodology.”</span> LBNL-2001326. Lawrence Berkeley National
-Laboratory.
+2019. <em>Low-Income Energy Affordability Data (LEAD) Tool
+Methodology</em>. LBNL-2001326. Lawrence Berkeley National Laboratory.
 </div>
 <div id="ref-ross2018high" class="csl-entry">
 Ross, Lauren, Ariel Drehobl, and Brian Stickles. 2018. <span>“How Energy
@@ -1225,9 +1223,9 @@ Address Disparities Across Household Energy Burdens.”</span> <em>Nature
 Communications</em> 13 (1): 1717. <a href="https://doi.org/10.1038/s41467-021-27673-y">https://doi.org/10.1038/s41467-021-27673-y</a>.
 </div>
 <div id="ref-sigrinRooftopSolarTechnical2018" class="csl-entry">
-Sigrin, Benjamin, and Meghan Mooney. 2018. <span>“The Rooftop Solar
+Sigrin, Benjamin, and Meghan Mooney. 2018. <em>The Rooftop Solar
 Technical Potential of Low-to-Moderate Income Households in the United
-States (REPLICA).”</span> NREL/TP-6A20-70901. National Renewable Energy
+States (REPLICA)</em>. NREL/TP-6A20-70901. National Renewable Energy
 Laboratory.
 </div>
 </div>
